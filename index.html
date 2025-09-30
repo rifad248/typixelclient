@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Registration System - Typixel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <body>
+  <div class="container">
+    <form method="post" action="https://script.google.com/macros/s/AKfycbx-R9Mu5qZ_9peI7TI3a9_5mmCjM1gF5jZg2dbN96LCjDnTxhvWgrhU4jtXuM6CGVW8/exec" name="contact-form">
+
+		</form>
+	</div>
+</body>
     <style>
         * {
             margin: 0;
@@ -795,7 +798,7 @@
         // Registration form
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+            const form = this;
             const formData = {
                 name: document.getElementById('fullName').value.trim(),
                 email: document.getElementById('emailAddress').value.trim(),
@@ -805,17 +808,38 @@
                 notes: document.getElementById('additionalNotes').value.trim(),
                 timestamp: new Date().toISOString()
             };
-            
             if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.rate) {
                 showNotification('Please fill all required fields', 'error');
                 return;
             }
-            
-            clients.unshift(formData);
-            showNotification('Registration successful! We will contact you soon.', 'success');
-            this.reset();
-            
-            updateDashboard();
+            // Send data to Google Apps Script
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx-R9Mu5qZ_9peI7TI3a9_5mmCjM1gF5jZg2dbN96LCjDnTxhvWgrhU4jtXuM6CGVW8/exec';
+            const urlEncoded = new URLSearchParams();
+            urlEncoded.append('name', formData.name);
+            urlEncoded.append('email', formData.email);
+            urlEncoded.append('phone', formData.phone);
+            urlEncoded.append('service', formData.service);
+            urlEncoded.append('rate', formData.rate);
+            urlEncoded.append('notes', formData.notes);
+            urlEncoded.append('timestamp', formData.timestamp);
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: urlEncoded.toString()
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Registration successful! We will contact you soon.', 'success');
+                    clients.unshift(formData);
+                    form.reset();
+                    updateDashboard();
+                } else {
+                    showNotification('Failed to submit. Please try again.', 'error');
+                }
+            })
+            .catch(() => {
+                showNotification('Failed to submit. Please try again.', 'error');
+            });
         });
         
         // Auth form
