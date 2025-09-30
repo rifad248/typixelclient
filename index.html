@@ -667,16 +667,9 @@
             </div>
         </footer>
     </div>
-            
-            </div>
-    </div>
-
     <script>
-  
-        // Navigation buttons
-        document.getElementById('homeBtn').addEventListener('click', function() {
-            showPage('registration');
 
+        
         // Registration form
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -724,37 +717,11 @@
             });
         });
         
-        // Auth form
-        document.getElementById('authForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('adminEmail').value.trim();
-            
-            if (email === ADMIN_EMAIL) {
-                document.getElementById('authScreen').style.display = 'none';
-                document.getElementById('adminDashboard').classList.add('active');
-                showNotification('Access granted - Welcome Admin!', 'success');
-                updateDashboard();
-            } else {
-                const msg = document.getElementById('authMessage');
-                msg.textContent = 'Access Denied: This panel is only for the admin of typixel.co';
-                msg.className = 'auth-message error';
-                msg.style.display = 'block';
             }
         });
-        
-        // Logout button
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            document.getElementById('authScreen').style.display = 'flex';
-            document.getElementById('adminDashboard').classList.remove('active');
-            document.getElementById('adminEmail').value = '';
-            document.getElementById('authMessage').style.display = 'none';
-            showNotification('Logged out successfully', 'success');
+    
         });
         
-        // Refresh button
-        document.getElementById('refreshBtn').addEventListener('click', function() {
-            updateDashboard();
-            showNotification('Dashboard refreshed', 'success');
         });
         
         function showPage(page) {
