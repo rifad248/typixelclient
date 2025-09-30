@@ -667,134 +667,16 @@
             </div>
         </footer>
     </div>
-
-    <div id="adminPage" class="page">
-        <div id="authScreen" class="auth-screen">
-            <div class="auth-container">
-                <div class="auth-card">
-                    <div class="lock-icon">
-                        <i class="fas fa-user-lock"></i>
-                    </div>
-                    
-                    <h2>Admin Access Only</h2>
-                    <p>This panel is restricted to Typixel administrators</p>
-                    
-                    <form id="authForm">
-                        <div class="form-group">
-                            <label for="adminEmail">Administrator Email</label>
-                            <div class="input-group">
-                                <i class="fas fa-user-shield"></i>
-                                <input type="email" id="adminEmail" placeholder="admin@typixel.co" required>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn-submit">
-                            <i class="fas fa-sign-in-alt"></i> Verify Access
-                        </button>
-                    </form>
-                    
-                    <div id="authMessage" class="auth-message"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="adminDashboard" class="admin-dashboard">
-            <header class="dashboard-header">
-                <div class="container dashboard-header-content">
-                    <div class="logo">
-                        <i class="fas fa-cube"></i> Typixel Admin
-                    </div>
-                    <div class="header-actions">
-                        <button id="refreshBtn" class="btn-refresh">
-                            <i class="fas fa-sync-alt"></i> Refresh
-                        </button>
-                        <button id="logoutBtn" class="btn-logout">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </button>
-                    </div>
-                </div>
-            </header>
             
-            <div class="dashboard-content">
-                <div class="container">
-                    <div class="dashboard-header-info">
-                        <h1>Client Management Dashboard</h1>
-                        <p>View and manage all registered clients</p>
-                    </div>
-                    
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="totalClients">0</h3>
-                                <p>Total Clients</p>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="newClients">0</h3>
-                                <p>New Today</p>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-briefcase"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="serviceTypes">0</h3>
-                                <p>Service Types</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="clients-table-container">
-                        <h2 style="margin-bottom: 1.5rem; color: #667eea;">Registered Clients</h2>
-                        <table class="clients-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Service</th>
-                                    <th>Expected Rate</th>
-                                    <th>Notes</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="clientsTableBody">
-                                <tr>
-                                    <td colspan="7" style="text-align: center; padding: 2rem; color: #7f8c8d;">
-                                        No clients registered yet
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
-        </div>
     </div>
 
     <script>
-        const clients = [];
-        const ADMIN_EMAIL = 'rifadwork@gmail.com';
-        
+  
         // Navigation buttons
         document.getElementById('homeBtn').addEventListener('click', function() {
             showPage('registration');
-        });
-        
-        document.getElementById('adminBtn').addEventListener('click', function() {
-            showPage('admin');
-        });
-        
+
         // Registration form
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
