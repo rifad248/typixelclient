@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <body>
-  <div class="container">
-    <form method="post" action="https://script.google.com/macros/s/AKfycbx-R9Mu5qZ_9peI7TI3a9_5mmCjM1gF5jZg2dbN96LCjDnTxhvWgrhU4jtXuM6CGVW8/exec" name="contact-form">
-
-		</form>
-	</div>
-</body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typixel - Client Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,7 +14,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
@@ -31,10 +28,16 @@
 
         .page {
             display: none;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .page.active {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
@@ -58,7 +61,7 @@
             align-items: center;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #667eea;
+            color: #0072ff;
         }
 
         .logo i {
@@ -82,19 +85,7 @@
         }
 
         .nav-links button:hover {
-            color: #667eea;
-        }
-
-        .admin-link {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white !important;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: transform 0.3s;
-        }
-
-        .admin-link:hover {
-            transform: translateY(-2px);
+            color: #0072ff;
         }
 
         .main-content {
@@ -110,6 +101,10 @@
         .section-header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .section-header p {
@@ -120,19 +115,120 @@
         .form-container {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             padding: 2.5rem;
             max-width: 800px;
             margin: 0 auto;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            z-index: 2;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-steps li {
+            list-style: none;
+            position: relative;
+            z-index: 3;
+            background: white;
+            padding: 0 10px;
+            font-weight: 600;
+            color: #95a5a6;
+            transition: color 0.3s;
+        }
+
+        .progress-steps li.active {
+            color: #0072ff;
+        }
+
+        .progress-steps li.completed {
+            color: #10b981;
+        }
+
+        .progress-steps li::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            z-index: 3;
+            transition: background 0.3s;
+        }
+
+        .progress-steps li.active::before {
+            background: #0072ff;
+        }
+
+        .progress-steps li.completed::before {
+            background: #10b981;
+        }
+
+        .progress-steps li.completed::after {
+            content: '✓';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            z-index: 4;
         }
 
         .form-section {
             margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: #f8f9fa;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .form-section h2 {
             font-size: 1.5rem;
-            color: #667eea;
+            color: #0072ff;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid #f0f0f0;
@@ -144,9 +240,9 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #2c3e50;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            color: #6b7280;
         }
 
         .input-group {
@@ -160,6 +256,7 @@
             left: 1rem;
             color: #95a5a6;
             z-index: 1;
+            font-size: 1.2rem;
         }
 
         .input-group input,
@@ -171,42 +268,147 @@
             border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: white;
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            opacity: 0.6;
         }
 
         .input-group input:focus,
         .input-group select:focus,
         .input-group textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .input-group input:hover,
+        .input-group select:hover,
+        .input-group textarea:hover {
+            border-color: #d0d0d0;
         }
 
         .input-group textarea {
             min-height: 100px;
-            resize: vertical;
+            resize: none;
+            overflow: hidden;
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            font-size: 1.2rem;
+        }
+
+        .validation-icon.success {
+            color: #10b981;
+        }
+
+        .validation-icon.error {
+            color: #e74c3c;
+        }
+
+        .validation-message {
+            margin-top: 0.3rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .validation-message.error {
+            color: #e74c3c;
+            display: block;
+        }
+
+        .validation-message.success {
+            color: #10b981;
+            display: block;
         }
 
         .btn-submit {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .trust-signals {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: black;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: black;
+            border: 1px solid #e0e0e0;
+        }
+
+        .trust-badge i {
+            color: #0072ff;
         }
 
         .packages-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             color: white;
             padding: 3rem 0;
             margin-top: 3rem;
@@ -237,12 +439,13 @@
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 2rem;
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
         .package-card:hover {
             transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .package-card h3 {
@@ -275,7 +478,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             padding: 1rem;
         }
 
@@ -298,7 +501,7 @@
 
         .lock-icon i {
             font-size: 4rem;
-            color: #667eea;
+            color: #0072ff;
         }
 
         .auth-card h2 {
@@ -336,7 +539,7 @@
         }
 
         .dashboard-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
             padding: 1rem 0;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -417,7 +620,7 @@
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
         }
 
         .stat-icon i {
@@ -452,7 +655,7 @@
             padding: 1rem;
             text-align: left;
             font-weight: 600;
-            color: #2c3e50;
+            color: #0072ff;
             border-bottom: 2px solid #e0e0e0;
         }
 
@@ -494,11 +697,241 @@
         }
 
         .footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             color: white;
             padding: 2rem 0;
             margin-top: 3rem;
             text-align: center;
+        }
+
+        .success-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .success-animation.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            transform: scale(0.7);
+            transition: transform 0.3s;
+        }
+
+        .success-animation.show .success-content {
+            transform: scale(1);
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .success-content h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .success-content p {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .btn-close {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .phone-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-input-group .country-code {
+            width: 120px;
+        }
+
+        .phone-input-group .phone-number {
+            flex: 1;
+        }
+
+        .rate-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .rate-input-group .min-rate,
+        .rate-input-group .max-rate {
+            flex: 1;
+        }
+
+        .rate-type {
+            width: 150px;
+        }
+
+        .file-upload {
+            margin-top: 10px;
+        }
+
+        .file-upload label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .file-upload label:hover {
+            background: #e0e0e0;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            margin-left: 10px;
+            font-size: 0.9rem;
+            color: #0072ff;
+        }
+
+        .service-search {
+            position: relative;
+        }
+
+        .service-search input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .service-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+        }
+
+        .service-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .service-category {
+            padding: 0.3rem 0.8rem;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .service-category.active {
+            background: #10b981;
+            color: white;
+        }
+
+        .service-options {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .service-option {
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .service-option:hover {
+            background: #f0f0f0;
+        }
+
+        .service-option.selected {
+            background: #e6f7ff;
+            color: #0072ff;
+        }
+
+        /* Social Media Buttons */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: #0072ff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .social-btn.facebook {
+            background: #1877F2;
+            color: white;
         }
 
         @media (max-width: 768px) {
@@ -518,6 +951,57 @@
             .stats-container {
                 grid-template-columns: 1fr;
             }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .phone-input-group {
+                flex-direction: column;
+            }
+
+            .phone-input-group .country-code,
+            .phone-input-group .phone-number {
+                width: 100%;
+            }
+
+            .rate-input-group {
+                flex-direction: column;
+            }
+
+            .rate-input-group .min-rate,
+            .rate-input-group .max-rate,
+            .rate-type {
+                width: 100%;
+            }
+
+            .btn-submit {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .input-group input,
+            .input-group select,
+            .input-group textarea {
+                padding: 0.8rem 1rem 0.8rem 2.5rem;
+                font-size: 0.9rem;
+            }
+
+            .input-group i {
+                left: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .social-media {
+                gap: 0.8rem;
+            }
+
+            .social-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -530,9 +1014,6 @@
                 </div>
                 <nav class="nav-links">
                     <button id="homeBtn">Home</button>
-                    <button id="adminBtn" class="admin-link">
-                        <i class="fas fa-lock"></i> Admin
-                    </button>
                 </nav>
             </div>
         </header>
@@ -540,65 +1021,136 @@
         <main class="main-content">
             <div class="container">
                 <div class="section-header">
-                    <h1>Client Registration</h1>
-                    <p>Join our network of satisfied clients</p>
+                    <h1><i class="fas fa-users"></i> Client Registration</h1>
+                    <p>Join our network of satisfied clients • Takes less than 2 minutes to complete</p>
                 </div>
                 
                 <div class="form-container">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                        <ul class="progress-steps">
+                            <li class="active" id="step1">Basic Information</li>
+                            <li id="step2">Project Details</li>
+                        </ul>
+                    </div>
+                    
                     <form id="registrationForm">
-                        <div class="form-section">
+                        <div class="form-section" id="section1">
                             <h2>Basic Information</h2>
                             
                             <div class="form-group">
-                                <label for="fullName">Full Name *</label>
+                                <label for="fullName"><i class="fas fa-users"></i> Full Name *</label>
                                 <div class="input-group">
                                     <i class="fas fa-user"></i>
                                     <input type="text" id="fullName" placeholder="Enter your full name" required>
+                                    <i class="validation-icon" id="nameValidationIcon"></i>
                                 </div>
+                                <div id="nameValidation" class="validation-message"></div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="emailAddress">Email Address *</label>
+                                <label for="emailAddress"><i class="fas fa-lock"></i> Email Address *</label>
                                 <div class="input-group">
                                     <i class="fas fa-envelope"></i>
                                     <input type="email" id="emailAddress" placeholder="your@email.com" required>
+                                    <i class="validation-icon" id="emailValidationIcon"></i>
                                 </div>
+                                <div id="emailValidation" class="validation-message"></div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="phoneNumber">Phone Number *</label>
-                                <div class="input-group">
-                                    <i class="fas fa-phone"></i>
-                                    <input type="tel" id="phoneNumber" placeholder="+91 98765 43210" required>
+                                <label for="phoneNumber"><i class="fas fa-lock"></i> Phone Number *</label>
+                                <div class="phone-input-group">
+                                    <div class="input-group country-code">
+                                        <i class="fas fa-globe"></i>
+                                        <select id="countryCode" required>
+                                            <option value="+91">+91 India</option>
+                                            <option value="+1">+1 USA</option>
+                                            <option value="+44">+44 UK</option>
+                                            <option value="+61">+61 Australia</option>
+                                            <option value="+86">+86 China</option>
+                                            <option value="+81">+81 Japan</option>
+                                            <option value="+49">+49 Germany</option>
+                                            <option value="+33">+33 France</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group phone-number">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="tel" id="phoneNumber" placeholder="98765 43210" required>
+                                        <i class="validation-icon" id="phoneValidationIcon"></i>
+                                    </div>
                                 </div>
+                                <div id="phoneValidation" class="validation-message"></div>
                             </div>
                         </div>
                         
-                        <div class="form-section">
+                        <div class="form-section" id="section2">
                             <h2>Project Details</h2>
                             
                             <div class="form-group">
                                 <label for="serviceType">Type of Service Required *</label>
-                                <div class="input-group">
-                                    <i class="fas fa-briefcase"></i>
-                                    <select id="serviceType" required>
-                                        <option value="">Select a service</option>
-                                        <option value="Logo Design">Logo Design (₹1,000 - ₹3,000)</option>
-                                        <option value="Posters">Posters (₹200 - ₹500)</option>
-                                        <option value="Brochures">Brochures (₹400 - ₹1,000)</option>
-                                        <option value="Business Cards">Business Cards (₹300 - ₹700)</option>
-                                        <option value="Mockups & Presentation">Branding (₹1500 - ₹2,000)</option>
-                                        <option value="Packaging Design">Packaging Design (₹500 - ₹1,500)</option>
-                                        <option value="Video Editing">Video Editing (₹700 - ₹2,000)</option>
-                                    </select>
+                                <div class="service-search">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="serviceSearch" placeholder="Search services...">
                                 </div>
+                                <div class="service-categories">
+                                    <div class="service-category active" data-category="all">All</div>
+                                    <div class="service-category" data-category="design">Design</div>
+                                    <div class="service-category" data-category="print">Print</div>
+                                    <div class="service-category" data-category="digital">Digital</div>
+                                </div>
+                                <div class="service-options" id="serviceOptions">
+                                    <div class="service-option" data-service="Logo Design" data-category="design">
+                                        <strong>Logo Design</strong> - ₹1,000 - ₹3,000
+                                    </div>
+                                    <div class="service-option" data-service="Posters" data-category="print">
+                                        <strong>Posters</strong> - ₹200 - ₹500
+                                    </div>
+                                    <div class="service-option" data-service="Brochures" data-category="print">
+                                        <strong>Brochures</strong> - ₹400 - ₹1,000
+                                    </div>
+                                    <div class="service-option" data-service="Business Cards" data-category="print">
+                                        <strong>Business Cards</strong> - ₹300 - ₹700
+                                    </div>
+                                    <div class="service-option" data-service="Mockups & Presentation" data-category="digital">
+                                        <strong>Mockups & Presentation</strong> - ₹500 - ₹2,000
+                                    </div>
+                                    <div class="service-option" data-service="Packaging Design" data-category="design">
+                                        <strong>Packaging Design</strong> - ₹500 - ₹1,500
+                                    </div>
+                                    <div class="service-option" data-service="Video Editing" data-category="digital">
+                                        <strong>Video Editing</strong> - ₹700 - ₹2,000
+                                    </div>
+                                    <div class="service-option" data-service="Opening" data-category="design">
+                                        <strong>Opening</strong> - ₹800 - ₹2,500
+                                    </div>
+                                    <div class="service-option" data-service="Closing" data-category="design">
+                                        <strong>Closing</strong> - ₹800 - ₹2,500
+                                    </div>
+                                </div>
+                                <input type="hidden" id="serviceType" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="expectedRate">Expected Rate (₹) *</label>
-                                <div class="input-group">
-                                    <i class="fas fa-rupee-sign"></i>
-                                    <input type="text" id="expectedRate" placeholder="Enter your expected rate" required>
+                                <div class="rate-input-group">
+                                    <div class="input-group min-rate">
+                                        <i class="fas fa-rupee-sign"></i>
+                                        <input type="number" id="minRate" placeholder="Min" min="0" required>
+                                    </div>
+                                    <span>to</span>
+                                    <div class="input-group max-rate">
+                                        <i class="fas fa-rupee-sign"></i>
+                                        <input type="number" id="maxRate" placeholder="Max" min="0" required>
+                                    </div>
+                                    <div class="input-group rate-type">
+                                        <i class="fas fa-tag"></i>
+                                        <select id="rateType" required>
+                                            <option value="Fixed Price">Fixed Price</option>
+                                            <option value="Hourly">Hourly</option>
+                                            <option value="Per Project">Per Project</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -608,6 +1160,7 @@
                                     <i class="fas fa-sticky-note"></i>
                                     <textarea id="additionalNotes" placeholder="Any additional information about your project..."></textarea>
                                 </div>
+                            
                             </div>
                         </div>
                         
@@ -615,6 +1168,24 @@
                             <i class="fas fa-user-plus"></i> Register Client
                         </button>
                     </form>
+                    
+                    <div class="trust-signals">
+                        <h3>Your privacy is our priority</h3>
+                        <div class="trust-badges">
+                            <div class="trust-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>We keep your data secure</span>
+                            </div>
+                            <div class="trust-badge">
+                                <i class="fas fa-lock"></i>
+                                <span>We never share your details</span>
+                            </div>
+                            <div class="trust-badge">
+                                <i class="fas fa-users"></i>
+                                <span>Trusted by 50+ businesses</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -663,6 +1234,17 @@
 
         <footer class="footer">
             <div class="container">
+                <div class="social-media">
+                    <a href="https://instagram.com/typixel" target="_blank" class="social-btn instagram" title="Contact us on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/919876543210" target="_blank" class="social-btn whatsapp" title="Contact us on WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://facebook.com/typixel" target="_blank" class="social-btn facebook" title="Contact us on Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
                 <p>&copy; 2023 Typixel. All rights reserved.</p>
             </div>
         </footer>
@@ -755,7 +1337,7 @@
                     </div>
                     
                     <div class="clients-table-container">
-                        <h2 style="margin-bottom: 1.5rem; color: #667eea;">Registered Clients</h2>
+                        <h2 style="margin-bottom: 1.5rem; color: #0072ff;">Registered Clients</h2>
                         <table class="clients-table">
                             <thead>
                                 <tr>
@@ -782,36 +1364,329 @@
         </div>
     </div>
 
+    <div id="successAnimation" class="success-animation">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering with Typixel. We'll contact you soon to discuss your project.</p>
+            <button class="btn-close" id="closeSuccess">Continue</button>
+        </div>
+    </div>
+
     <script>
         const clients = [];
         const ADMIN_EMAIL = 'rifadwork@gmail.com';
+        let currentStep = 1;
+        const totalSteps = 2;
         
         // Navigation buttons
         document.getElementById('homeBtn').addEventListener('click', function() {
             showPage('registration');
         });
         
-        document.getElementById('adminBtn').addEventListener('click', function() {
-            showPage('admin');
+        // Form validation
+        const nameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('emailAddress');
+        const phoneInput = document.getElementById('phoneNumber');
+        const countryCodeSelect = document.getElementById('countryCode');
+        const additionalNotesTextarea = document.getElementById('additionalNotes');
+        const minRateInput = document.getElementById('minRate');
+        const maxRateInput = document.getElementById('maxRate');
+        const rateTypeSelect = document.getElementById('rateType');
+        const serviceTypeInput = document.getElementById('serviceType');
+        
+        nameInput.addEventListener('input', function() {
+            validateName();
+            updateFormProgress();
         });
+        
+        emailInput.addEventListener('input', function() {
+            validateEmail();
+            updateFormProgress();
+        });
+        
+        phoneInput.addEventListener('input', function() {
+            validatePhone();
+            updateFormProgress();
+        });
+        
+        countryCodeSelect.addEventListener('change', updateFormProgress);
+        minRateInput.addEventListener('input', updateFormProgress);
+        maxRateInput.addEventListener('input', updateFormProgress);
+        rateTypeSelect.addEventListener('change', updateFormProgress);
+        
+        // Auto-expand textarea
+        additionalNotesTextarea.addEventListener('input', function() {
+            autoExpandTextarea.call(this);
+            updateFormProgress();
+        });
+        
+        // File upload
+        document.getElementById('fileUpload').addEventListener('change', function() {
+            const fileName = document.getElementById('fileName');
+            if (this.files.length > 0) {
+                if (this.files.length === 1) {
+                    fileName.textContent = this.files[0].name;
+                } else {
+                    fileName.textContent = `${this.files.length} files selected`;
+                }
+            } else {
+                fileName.textContent = '';
+            }
+        });
+        
+        // Service selection
+        const serviceOptions = document.querySelectorAll('.service-option');
+        const serviceCategories = document.querySelectorAll('.service-category');
+        const serviceSearch = document.getElementById('serviceSearch');
+        
+        serviceOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                serviceOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Update hidden input with selected service
+                serviceTypeInput.value = this.dataset.service;
+                updateFormProgress();
+            });
+        });
+        
+        serviceCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                // Remove active class from all categories
+                serviceCategories.forEach(cat => cat.classList.remove('active'));
+                
+                // Add active class to clicked category
+                this.classList.add('active');
+                
+                // Filter options by category
+                const selectedCategory = this.dataset.category;
+                filterServices(selectedCategory);
+            });
+        });
+        
+        serviceSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            serviceOptions.forEach(option => {
+                const serviceName = option.textContent.toLowerCase();
+                if (serviceName.includes(searchTerm)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
+        
+        function filterServices(category) {
+            serviceOptions.forEach(option => {
+                if (category === 'all' || option.dataset.category === category) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+        
+        // Progress indicator
+        function updateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = (currentStep / totalSteps) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            
+            // Update step indicators
+            document.getElementById('step1').classList.toggle('active', currentStep >= 1);
+            document.getElementById('step1').classList.toggle('completed', currentStep > 1);
+            document.getElementById('step2').classList.toggle('active', currentStep >= 2);
+        }
+        
+        // Form field navigation
+        nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                emailInput.focus();
+            }
+        });
+        
+        emailInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                phoneInput.focus();
+            }
+        });
+        
+        phoneInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('serviceSearch').focus();
+            }
+        });
+        
+        function validateName() {
+            const name = nameInput.value.trim();
+            const nameValidation = document.getElementById('nameValidation');
+            const nameValidationIcon = document.getElementById('nameValidationIcon');
+            
+            if (name.length < 3) {
+                nameValidation.textContent = 'Name must be at least 3 characters';
+                nameValidation.className = 'validation-message error';
+                nameValidationIcon.className = 'validation-icon error fas fa-exclamation-circle';
+                return false;
+            } else {
+                nameValidation.textContent = 'Looks good!';
+                nameValidation.className = 'validation-message success';
+                nameValidationIcon.className = 'validation-icon success fas fa-check-circle';
+                return true;
+            }
+        }
+        
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailValidation = document.getElementById('emailValidation');
+            const emailValidationIcon = document.getElementById('emailValidationIcon');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                emailValidation.textContent = 'Please enter a valid email address';
+                emailValidation.className = 'validation-message error';
+                emailValidationIcon.className = 'validation-icon error fas fa-exclamation-circle';
+                return false;
+            } else {
+                emailValidation.textContent = 'Valid email address';
+                emailValidation.className = 'validation-message success';
+                emailValidationIcon.className = 'validation-icon success fas fa-check-circle';
+                return true;
+            }
+        }
+        
+        function validatePhone() {
+            const phone = phoneInput.value.trim();
+            const phoneValidation = document.getElementById('phoneValidation');
+            const phoneValidationIcon = document.getElementById('phoneValidationIcon');
+            const countryCode = countryCodeSelect.value;
+            const phoneRegex = /^[\d\s\-\(\)]+$/;
+            
+            if (!phoneRegex.test(phone) || phone.length < 6) {
+                phoneValidation.textContent = 'Please enter a valid phone number';
+                phoneValidation.className = 'validation-message error';
+                phoneValidationIcon.className = 'validation-icon error fas fa-exclamation-circle';
+                return false;
+            } else {
+                phoneValidation.textContent = 'Valid phone number';
+                phoneValidation.className = 'validation-message success';
+                phoneValidationIcon.className = 'validation-icon success fas fa-check-circle';
+                return true;
+            }
+        }
+        
+        // Update form progress based on filled fields
+        function updateFormProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const totalFields = 7; // name, email, phone, service, minRate, maxRate, rateType
+            let completedFields = 0;
+            
+            // Check name
+            if (nameInput.value.trim() !== '' && validateName()) {
+                completedFields++;
+            }
+            
+            // Check email
+            if (emailInput.value.trim() !== '' && validateEmail()) {
+                completedFields++;
+            }
+            
+            // Check phone
+            if (phoneInput.value.trim() !== '' && validatePhone()) {
+                completedFields++;
+            }
+            
+            // Check service
+            if (serviceTypeInput.value !== '') {
+                completedFields++;
+            }
+            
+            // Check min rate
+            if (minRateInput.value !== '') {
+                completedFields++;
+            }
+            
+            // Check max rate
+            if (maxRateInput.value !== '') {
+                completedFields++;
+            }
+            
+            // Check rate type
+            if (rateTypeSelect.value !== '') {
+                completedFields++;
+            }
+            
+            // Calculate progress percentage
+            const progressPercentage = (completedFields / totalFields) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            
+            // Update step indicators based on progress
+            if (progressPercentage > 0) {
+                document.getElementById('step1').classList.add('active');
+            }
+            
+            if (progressPercentage >= 50) {
+                document.getElementById('step1').classList.add('completed');
+                document.getElementById('step2').classList.add('active');
+            }
+            
+            if (progressPercentage >= 100) {
+                document.getElementById('step2').classList.add('completed');
+            }
+        }
         
         // Registration form
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const form = this;
-            const formData = {
-                name: document.getElementById('fullName').value.trim(),
-                email: document.getElementById('emailAddress').value.trim(),
-                phone: document.getElementById('phoneNumber').value.trim(),
-                service: document.getElementById('serviceType').value,
-                rate: document.getElementById('expectedRate').value.trim(),
-                notes: document.getElementById('additionalNotes').value.trim(),
-                timestamp: new Date().toISOString()
-            };
-            if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.rate) {
-                showNotification('Please fill all required fields', 'error');
+            
+            // Validate all fields
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isPhoneValid = validatePhone();
+            
+            if (!isNameValid || !isEmailValid || !isPhoneValid) {
+                showNotification('Please fix the errors in the form', 'error');
                 return;
             }
+            
+            // Check if service is selected
+            if (!serviceTypeInput.value) {
+                showNotification('Please select a service', 'error');
+                return;
+            }
+            
+            // Get rate values
+            const minRate = minRateInput.value;
+            const maxRate = maxRateInput.value;
+            const rateType = rateTypeSelect.value;
+            
+            if (!minRate || !maxRate) {
+                showNotification('Please enter both minimum and maximum rates', 'error');
+                return;
+            }
+            
+            const formData = {
+                name: nameInput.value.trim(),
+                email: emailInput.value.trim(),
+                phone: countryCodeSelect.value + ' ' + phoneInput.value.trim(),
+                service: serviceTypeInput.value,
+                minRate: minRate,
+                maxRate: maxRate,
+                rateType: rateType,
+                notes: additionalNotesTextarea.value.trim(),
+                timestamp: new Date().toISOString()
+            };
+            
             // Send data to Google Apps Script
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx-R9Mu5qZ_9peI7TI3a9_5mmCjM1gF5jZg2dbN96LCjDnTxhvWgrhU4jtXuM6CGVW8/exec';
             const urlEncoded = new URLSearchParams();
@@ -819,9 +1694,10 @@
             urlEncoded.append('email', formData.email);
             urlEncoded.append('phone', formData.phone);
             urlEncoded.append('service', formData.service);
-            urlEncoded.append('rate', formData.rate);
+            urlEncoded.append('rate', `${formData.minRate} - ${formData.maxRate} (${formData.rateType})`);
             urlEncoded.append('notes', formData.notes);
             urlEncoded.append('timestamp', formData.timestamp);
+            
             fetch(scriptURL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -829,10 +1705,28 @@
             })
             .then(response => {
                 if (response.ok) {
-                    showNotification('Registration successful! We will contact you soon.', 'success');
+                    showSuccessAnimation();
                     clients.unshift(formData);
                     form.reset();
                     updateDashboard();
+                    
+                    // Reset validation messages
+                    document.getElementById('nameValidation').textContent = '';
+                    document.getElementById('emailValidation').textContent = '';
+                    document.getElementById('phoneValidation').textContent = '';
+                    document.getElementById('nameValidationIcon').className = 'validation-icon';
+                    document.getElementById('emailValidationIcon').className = 'validation-icon';
+                    document.getElementById('phoneValidationIcon').className = 'validation-icon';
+                    
+                    // Reset service selection
+                    serviceOptions.forEach(opt => opt.classList.remove('selected'));
+                    serviceTypeInput.value = '';
+                    
+                    // Reset file name
+                    document.getElementById('fileName').textContent = '';
+                    
+                    // Reset progress bar
+                    updateFormProgress();
                 } else {
                     showNotification('Failed to submit. Please try again.', 'error');
                 }
@@ -873,6 +1767,11 @@
         document.getElementById('refreshBtn').addEventListener('click', function() {
             updateDashboard();
             showNotification('Dashboard refreshed', 'success');
+        });
+        
+        // Close success animation
+        document.getElementById('closeSuccess').addEventListener('click', function() {
+            document.getElementById('successAnimation').classList.remove('show');
         });
         
         function showPage(page) {
@@ -916,7 +1815,7 @@
                     <td>${client.email}</td>
                     <td>${client.phone}</td>
                     <td>${client.service}</td>
-                    <td>₹${client.rate}</td>
+                    <td>₹${client.minRate} - ₹${client.maxRate} (${client.rateType})</td>
                     <td>${client.notes || '-'}</td>
                     <td>${dateStr}</td>
                 `;
@@ -935,6 +1834,18 @@
                 setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
+        
+        function showSuccessAnimation() {
+            document.getElementById('successAnimation').classList.add('show');
+        }
+        
+        function autoExpandTextarea() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        }
+        
+        // Initialize progress
+        updateProgress();
     </script>
 </body>
 </html>
